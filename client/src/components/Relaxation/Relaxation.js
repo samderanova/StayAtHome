@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class TaskGenerator extends React.Component {
+export default class Relaxation extends React.Component {
     constructor() {
         super()
         this.state = {
