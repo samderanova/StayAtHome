@@ -1,24 +1,35 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
+require('dotenv').config();
 
-const MongoClient = require('mongodb').MongoClient;
+const app = express();
+const port = process.env.PORT || 3000;
+
+// handles CORS
+app.use(cors());
+// allows parsing of JSON
+app.use(express.json());
+
 const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
+const connection = mongoose.connection;
 
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+connection.once('open', () => {
+  console.log("MongoDB database connection established!")
 })
 
+const taskRouter = require('./routes/tasks');
+app.use('/tasks', taskRouter);
+/*
+const exercisesRouter= require('./routes/exercises');
+const usersRouter = require('./routes/users');
+
+app.use('/exercises', exercisesRouter);
+app.use('/users', usersRouter);
+*/
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Server is running on port: ${port}`);
 })
