@@ -16,17 +16,21 @@ export default class Feed extends React.Component {
 
     }
     toggleTrending() {
+        // If the color of the h2 element with id #covidInfo has this color (a light blue), then change it to black
         if (document.getElementById("covidInfo").style.color === "rgb(138, 180, 249)") {
             document.getElementById("covidInfo").style.color = "black"
         }
+        // Change the color of the h2 element with id #trending to this color
         document.getElementById("trending").style.color = "rgb(138, 180, 249)"
+        // Set the state to trending in order to toggle the Trend component that contains trends
         this.setState({feed: "Trending"})
     }
     toggleCovidInfo() {
         if (document.getElementById("trending").style.color === "rgb(138, 180, 249)") {
             document.getElementById("trending").style.color = "black"
         }
-        document.getElementById("covidInfo").style.color = "rgb(138, 180, 249)"        
+        document.getElementById("covidInfo").style.color = "rgb(138, 180, 249)"  
+        // Set the state to COVID Information in order to toggle the Trend component that contains COVID information      
         this.setState({feed: "COVID Information"})
     }
     render() {
@@ -46,10 +50,10 @@ export default class Feed extends React.Component {
                     COVID-19</h2>
                 </div>
                 <div className="right">
-                    {this.state.feed === "Trending"
+                    {this.state.feed === "Trending" // If the state of feed is "Trending", then render trending stuff
                     ?
                         <Trending category="Trending"/>
-                    :
+                    : // otherwise, render COVID information
                         <Trending category="COVID Information" />
                     }
                 </div>
