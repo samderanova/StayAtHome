@@ -15,7 +15,6 @@ router.route('/create').post((req, res) => {
     // client should send this over
     dueDate: req.body.dueDate,
     taskName: req.body.taskName,
-    description: req.body.description,
     username: req.body.username
   }
 
@@ -38,6 +37,16 @@ router.route("/username/:username").get((req, res) => {
       console.log("tasks found: " + task)
     })
     .catch(err => res.status(400).send("Error: " + err));
+})
+
+router.route("/delete/:taskId").delete((req, res) => {
+  Task.findOneAndDelete({taskId : req.params.taskId})
+    .then (() => {
+      res.status(200).send("task successfully deleted");
+      console.log("task deleted!");
+    })
+
+    .catch (err => res.status(400).send("Error: " + err));
 })
 
 module.exports = router;
