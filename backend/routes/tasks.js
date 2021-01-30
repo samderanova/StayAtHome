@@ -10,9 +10,6 @@ router.route('/').get((req, res) => {
 
 router.route('/create').post((req, res) => {
   query = {
-    taskId: new mongoose.Types.ObjectId(),
-    todoListId: req.body.todoListId,
-    // client should send this over
     dueDate: req.body.dueDate,
     taskName: req.body.taskName,
     username: req.body.username
