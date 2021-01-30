@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import {url} from '../../index'
+import './Trend.css'
 
 
 export default class Trend extends React.Component {
@@ -6,22 +9,33 @@ export default class Trend extends React.Component {
         super(props)
     }
     componentDidMount() {
-        // Make calls to NYT and Trends APIs here using axios
+        // Make calls to Movie API
+        axios.get(`${url}/`)
     }
     render() {
-        return (
-            <div className="Trend">
-                {this.props.category === "Trending" 
-                ?
+        if (this.props.category === "Trending") {
+            return (
                 <div>
                     <h1>This is the trending section</h1>
                 </div>
-                :
-                <div>
-                    <h1>This is the blank information section</h1>
+            )
+        }
+
+        else if (this.props.category === "Movies") {
+            return (
+                <div className="Trend">
+                    <h1>Blank</h1>
                 </div>
-                }
-            </div>
-        )
+            )
+        }
+
+        else if (this.props.category === "") {
+            return (
+                <div>
+                    
+                </div>
+            )
+        }
+        
     }
 }

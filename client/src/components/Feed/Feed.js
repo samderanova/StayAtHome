@@ -1,5 +1,5 @@
 import React from 'react'
-import Trending from '../Trend/Trend'
+import Trend from '../Trend/Trend'
 import './Feed.css'
 
 
@@ -52,9 +52,9 @@ export default class Feed extends React.Component {
                 <div className="right">
                     {this.state.feed === "Trending" // If the state of feed is "Trending", then render trending stuff
                     ?
-                        <Trending category="Trending"/>
-                    : // otherwise, render COVID information
-                        <Trending category="COVID Information" />
+                        <Trend category="Trending"/>
+                    : // otherwise, render ___
+                        <Trend category="Blank" />
                     }
                 </div>
             </div>

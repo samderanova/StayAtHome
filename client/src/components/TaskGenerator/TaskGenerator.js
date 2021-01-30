@@ -28,27 +28,45 @@ export default class TaskGenerator extends React.Component {
         }
         this.addTask = this.addTask.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.getTasks = this.getTasks.bind(this)
+        this.checkInput = this.checkInput.bind(this)
     }
     componentDidMount() {
     }
     handleChange(e) {
         this.setState({userInput: e.target.value})
     }
-    addTask(task) {
-        let input_val = document.getElementById('username');
+    checkInput(input_val) {
         if (input_val.value === '') {
             ReactDOM.render(<Alert severity="error" style={{position: 'absolute', width: '100%', padding: 20, bottom: 0}}>Please enter a username!</Alert>, document.getElementById('success-or-error'))
-            return
+            return false
         }
+        return true
+    }
+    addTask(task) {
+        let input_val = document.getElementById('username')
+        if (!this.checkInput(input_val)) return
         let id = Math.floor(Math.random() * 1000000)
         let taskDue = new Date()
         axios.post(`${url}/tasks/create`, { 
             todoListId: id,
             dueDate: taskDue.setDate(taskDue.getDate() + 5),
             taskName: task,
-            username: `user${id}`
+            username: input_val.value
         })
-            .then(() => ReactDOM.render(<Alert severity="success" style={{position: 'absolute', width: '100%', padding: 20, bottom: 0}}>Task added!</Alert>, document.getElementById('success-or-error')))
+            .then(() => alert('Task added!'))
+            .catch(err => console.log(err))
+        this.getTasks()
+    }
+    getTasks() {
+        let input_val = document.getElementById('username');
+        if (!this.checkInput(input_val)) return
+        console.log(input_val.value)
+        axios.get(`${url}/tasks/username/${input_val.value}`)
+            .then(res => {
+                ReactDOM.render(res.data.map(task => <h3 key={task.taskName}>{task.taskName}</h3>), document.getElementById('todo-list'))
+                
+            })
             .catch(err => console.log(err))
     }
     render() {
@@ -61,9 +79,11 @@ export default class TaskGenerator extends React.Component {
                     <div className="task-actions">
                         <button type="button" onClick={() => this.addTask(this.tasks[this.state.taskNum])}>Add task</button>
                         <button type="button" onClick={() => window.location.reload()}>Regenerate task</button>
+                        <button type="button" id="see-tasks" onClick={() => this.getTasks()}>See your tasks!</button>
                         <br></br>
-                        <input type="text" id="username" name="username" onChange={(e) => this.handleChange(e)} placeholder="Please input a username to store your tasks!" />
+                        <input type="text" id="username" name="username" onChange={(e) => this.handleChange(e)} placeholder="Please input a username to store this task or show your current tasks!" />
                     </div>
+                    <div id="todo-list"></div>
                 </div>
                 <div id="success-or-error"></div>
             </div>
