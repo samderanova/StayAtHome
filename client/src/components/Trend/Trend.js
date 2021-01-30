@@ -14,11 +14,11 @@ export default class Trend extends React.Component {
                 {this.props.category === "Trending" 
                 ?
                 <div>
-                    {this.props.category}
+                    <h1>This is the trending section</h1>
                 </div>
                 :
                 <div>
-                    {this.props.category}
+                    <h1>This is the blank information section</h1>
                 </div>
                 }
             </div>

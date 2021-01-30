@@ -3,15 +3,17 @@ let Task = require('../models/tasks.models');
 const mongoose = require('mongoose');
 
 router.route('/').get((req, res) => {
-  res.status(200).send("Hello world");
+  Task.find()
+    .then(task => res.json(task))
+    .catch(err => console.log(err))
 })
 
 router.route('/create').post((req, res) => {
   query = {
     taskId: new mongoose.Types.ObjectId(),
-    todoListId: 39210740137123,
+    todoListId: req.body.todoListId,
     // client should send this over
-    dueDate: new Date(),
+    dueDate: req.body.dueDate,
     taskName: req.body.taskName,
     description: req.body.description,
     username: req.body.username
@@ -24,7 +26,7 @@ router.route('/create').post((req, res) => {
       console.log("task has been added!");
     })
     .catch(err => {
-      res.status(200).send("task failed, error: " + err);
+      res.status(400).send("task failed, error: " + err);
       console.log("task cannot be added")
     });
 })
