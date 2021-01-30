@@ -2,6 +2,7 @@ const router = require('express').Router();
 let Task = require('../models/tasks.models');
 const mongoose = require('mongoose');
 
+
 router.route('/').get((req, res) => {
   Task.find()
     .then(task => res.json(task))
@@ -31,13 +32,13 @@ router.route("/username/:username").get((req, res) => {
   Task.find({username: req.params.username})
     .then (task => {
       res.status(200).send(task);
-      console.log("tasks found: " + task)
+      console.log("tasks found: " + task);
     })
     .catch(err => res.status(400).send("Error: " + err));
 })
 
 router.route("/delete/:taskId").delete((req, res) => {
-  Task.findOneAndDelete({taskId : req.params.taskId})
+  Task.findByIdAndDelete(req.params.taskId)
     .then (() => {
       res.status(200).send("task successfully deleted");
       console.log("task deleted!");
