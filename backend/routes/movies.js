@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
 
       for (var j = 0; j < results.length; j++) {
         movieData = {
+          "movieUri":"https://themoviedb.org/movie/"+results[j]["id"],
           "title": results[j]["title"],
           "image": "http://image.tmdb.org/t/p/w185" + results[j]["poster_path"],
           "description": results[j]["overview"]
