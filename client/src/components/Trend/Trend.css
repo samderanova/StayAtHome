@@ -1,0 +1,19 @@
+.div-1 {
+    background-color: #3f51b5;
+    height:auto;
+    width:auto;
+    font-size: 10px;
+    color: white; 
+    align-items: center;
+    justify-content: center;
+  }
+.div-2 {
+    font-size: 10px;
+    color: blue;
+}
+
+
+tr > td:nth-child(2) {
+  text-align: center;
+  width: 50%;
+}

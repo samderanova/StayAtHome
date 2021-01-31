@@ -1,0 +1,28 @@
+.Task {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 30px 20px;
+}
+
+.Task h3 {
+    float: left;
+}
+
+.Task svg {
+    float: right;
+}
+
+.Task svg:hover {
+    color: #ff8f8f;
+    cursor: pointer;
+}
+
+.Task svg:active {
+    color: red;
+}
+
