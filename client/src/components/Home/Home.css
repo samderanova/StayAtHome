@@ -1,10 +1,15 @@
 .Home {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 60vh;
+    padding: 50px 0;
+}
+
+.Home-Overall > p {
+    padding: 30px 80px;
     text-align: center;
-    animation-name: fadeIn;
-    animation-duration: 1.5s;
+    font-size: 20px;
+    line-height: 1.75em;
 }

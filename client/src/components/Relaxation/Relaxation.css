@@ -9,3 +9,11 @@
 .playlists iframe {
     margin: 30px;
 }
+
+.arrows > span {
+    padding: 30px;
+}
+
+.arrows > span:hover {
+    cursor: pointer;
+}
