@@ -83,7 +83,7 @@ export default class TaskGenerator extends React.Component {
             <div>
                 <div className="TaskGenerator">
                     <div className="task">
-                        <h2>{this.tasks[this.state.taskNum]}</h2>
+                        <h1>{this.tasks[this.state.taskNum]}</h1>
                     </div>
                     <div className="task-actions">
                         <button type="button" onClick={() => this.addTask(this.tasks[this.state.taskNum])}>Add task</button>

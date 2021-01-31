@@ -11,15 +11,16 @@ svg {
 }
 
 .left > h2 {
-    padding: 15px 10px;
+    padding: 30px 30px  0 30px;
 }
 
 .left > h2:hover {
     color: gray;
     cursor: pointer;
+    transition: 0.1s linear;
 }
 
-.left > #trending {
+#trending {
     color: rgb(138, 180, 249);
 }
 
