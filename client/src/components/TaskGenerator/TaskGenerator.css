@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    flex-direction: column;
+    padding: 50px 0;
 }
 
 .task-actions button, #see-tasks {
