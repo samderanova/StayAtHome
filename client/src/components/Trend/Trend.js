@@ -1,16 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import {url} from '../../index'
 import './Trend.css'
 
 
 export default class Trend extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            
+        }
     }
     componentDidMount() {
         // Make calls to Movie API
-        axios.get(`${url}/`)
     }
     render() {
         if (this.props.category === "Trending") {
@@ -36,6 +37,12 @@ export default class Trend extends React.Component {
                 <div>
                     <h1>Blank</h1>
                 </div>
+            )
+        }
+
+        else {
+            return (
+                <div></div>
             )
         }
         

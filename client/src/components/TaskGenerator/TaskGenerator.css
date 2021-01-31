@@ -2,18 +2,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    flex-direction: column;
+    padding: 50px 0;
 }
 
 .task-actions button, #see-tasks {
-    font-size: 15px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 20px;
     min-width: 12em;
     padding: 10px 0;
     margin: 60px 10px;
 }
 
+.task-actions button:hover, #see-tasks:hover {
+    background-color: lightgray;
+    transition: 0.1s linear;
+}
+
 .task-actions #username{
     width: 100%;
-    font-size: 15px;
+    font-size: 20px;
     padding: 15px;
 }

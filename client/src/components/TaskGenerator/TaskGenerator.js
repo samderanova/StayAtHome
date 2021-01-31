@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
 import {url} from '../../index'
-import {Alert} from '@material-ui/lab'
+import Task from '../Task/Task'
 import './TaskGenerator.css'
 
 export default class TaskGenerator extends React.Component {
@@ -38,7 +38,7 @@ export default class TaskGenerator extends React.Component {
     }
     checkInput(input_val) {
         if (input_val.value === '') {
-            ReactDOM.render(<Alert severity="error" style={{position: 'absolute', width: '100%', padding: 20, bottom: 0}}>Please enter a username!</Alert>, document.getElementById('success-or-error'))
+            alert('Please enter a username!')
             return false
         }
         return true
@@ -61,20 +61,29 @@ export default class TaskGenerator extends React.Component {
     getTasks() {
         let input_val = document.getElementById('username');
         if (!this.checkInput(input_val)) return
-        console.log(input_val.value)
         axios.get(`${url}/tasks/username/${input_val.value}`)
             .then(res => {
-                ReactDOM.render(res.data.map(task => <h3 key={task.taskName}>{task.taskName}</h3>), document.getElementById('todo-list'))
+                var taskElements = []
+                for (var i=0; i<res.data.length; i++) {
+                    var task = res.data[i]
+                    taskElements.push(<Task key={i} task={task} />)
+                }
+                if (taskElements.length === 0) {
+                    ReactDOM.render(<h3 style={{margin: 20}}>No tasks found! Try adding a few tasks.</h3>, document.getElementById('todo-list'))
+                }
+                else {
+                    ReactDOM.render(taskElements, document.getElementById('todo-list'))
+                }
                 
             })
-            .catch(err => console.log(err))
+            .catch(err => ReactDOM.Re)
     }
     render() {
         return (
             <div>
                 <div className="TaskGenerator">
                     <div className="task">
-                        <h2>{this.tasks[this.state.taskNum]}</h2>
+                        <h1>{this.tasks[this.state.taskNum]}</h1>
                     </div>
                     <div className="task-actions">
                         <button type="button" onClick={() => this.addTask(this.tasks[this.state.taskNum])}>Add task</button>
