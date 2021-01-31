@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios';
 import {url} from '../../index'
-import {Alert} from '@material-ui/lab'
+import Task from '../Task/Task'
 import './TaskGenerator.css'
 
 export default class TaskGenerator extends React.Component {
@@ -28,42 +28,71 @@ export default class TaskGenerator extends React.Component {
         }
         this.addTask = this.addTask.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.getTasks = this.getTasks.bind(this)
+        this.checkInput = this.checkInput.bind(this)
     }
     componentDidMount() {
     }
     handleChange(e) {
         this.setState({userInput: e.target.value})
     }
-    addTask(task) {
-        let input_val = document.getElementById('username');
+    checkInput(input_val) {
         if (input_val.value === '') {
-            ReactDOM.render(<Alert severity="error" style={{position: 'absolute', width: '100%', padding: 20, bottom: 0}}>Please enter a username!</Alert>, document.getElementById('success-or-error'))
-            return
+            alert('Please enter a username!')
+            return false
         }
+        return true
+    }
+    addTask(task) {
+        let input_val = document.getElementById('username')
+        if (!this.checkInput(input_val)) return
         let id = Math.floor(Math.random() * 1000000)
         let taskDue = new Date()
         axios.post(`${url}/tasks/create`, { 
             todoListId: id,
             dueDate: taskDue.setDate(taskDue.getDate() + 5),
             taskName: task,
-            username: `user${id}`
+            username: input_val.value
         })
-            .then(() => ReactDOM.render(<Alert severity="success" style={{position: 'absolute', width: '100%', padding: 20, bottom: 0}}>Task added!</Alert>, document.getElementById('success-or-error')))
+            .then(() => alert('Task added!'))
             .catch(err => console.log(err))
+        this.getTasks()
+    }
+    getTasks() {
+        let input_val = document.getElementById('username');
+        if (!this.checkInput(input_val)) return
+        axios.get(`${url}/tasks/username/${input_val.value}`)
+            .then(res => {
+                var taskElements = []
+                for (var i=0; i<res.data.length; i++) {
+                    var task = res.data[i]
+                    taskElements.push(<Task key={i} task={task} />)
+                }
+                if (taskElements.length === 0) {
+                    ReactDOM.render(<h3 style={{margin: 20}}>No tasks found! Try adding a few tasks.</h3>, document.getElementById('todo-list'))
+                }
+                else {
+                    ReactDOM.render(taskElements, document.getElementById('todo-list'))
+                }
+                
+            })
+            .catch(err => ReactDOM.Re)
     }
     render() {
         return (
             <div>
                 <div className="TaskGenerator">
                     <div className="task">
-                        <h2>{this.tasks[this.state.taskNum]}</h2>
+                        <h1>{this.tasks[this.state.taskNum]}</h1>
                     </div>
                     <div className="task-actions">
                         <button type="button" onClick={() => this.addTask(this.tasks[this.state.taskNum])}>Add task</button>
                         <button type="button" onClick={() => window.location.reload()}>Regenerate task</button>
+                        <button type="button" id="see-tasks" onClick={() => this.getTasks()}>See your tasks!</button>
                         <br></br>
-                        <input type="text" id="username" name="username" onChange={(e) => this.handleChange(e)} placeholder="Please input a username to store your tasks!" />
+                        <input type="text" id="username" name="username" onChange={(e) => this.handleChange(e)} placeholder="Please input a username to store this task or show your current tasks!" />
                     </div>
+                    <div id="todo-list"></div>
                 </div>
                 <div id="success-or-error"></div>
             </div>
