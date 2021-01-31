@@ -27,13 +27,6 @@ const jokeRouter = require('./routes/jokes');
 app.use('/tasks', taskRouter);
 app.use('/movies', movieRouter);
 app.use('/jokes', jokeRouter);
-/*
-const exercisesRouter= require('./routes/exercises');
-const usersRouter = require('./routes/users');
-
-app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
-*/
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
