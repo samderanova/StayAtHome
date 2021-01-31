@@ -22,6 +22,7 @@ connection.once('open', () => {
 
 const taskRouter = require('./routes/tasks');
 const movieRouter = require('./routes/movies');
+const jokeRouter = require('./routes/jokes');
 
 app.use('/tasks', taskRouter);
 app.use('/movies', movieRouter);

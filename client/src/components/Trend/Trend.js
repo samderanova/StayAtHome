@@ -16,8 +16,9 @@ export default class Trend extends React.Component {
     render() {
         if (this.props.category === "Trending") {
             return (
-                <div>
+                <div className="div-1">
                     <h1>This is the trending section</h1>
+                    <h2>Find the latest movies, music and jokes!</h2>
                 </div>
             )
         }
@@ -25,7 +26,8 @@ export default class Trend extends React.Component {
         else if (this.props.category === "Movies") {
             return (
                 <div className="Trend">
-                    <h1>Blank</h1>
+                    <h1>This is the movie section</h1>
+                    <iframe src="" title="Trending Movies" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                 </div>
             )
         }
@@ -33,7 +35,7 @@ export default class Trend extends React.Component {
         else if (this.props.category === "") {
             return (
                 <div>
-                    
+                    <h1>Blank</h1>
                 </div>
             )
         }
