@@ -14,16 +14,7 @@ export default class Trend extends React.Component {
         // Make calls to Movie API
     }
     render() {
-        if (this.props.category === "Trending") {
-            return (
-                <div className="div-1">
-                    <h1>This is the trending section</h1>
-                    <h2>Find the latest movies, music and jokes!</h2>
-                </div>
-            )
-        }
-
-        else if (this.props.category === "Movies") {
+        if (this.props.category === "Movies") {
             return (
                 <div className="Trend">
                     <h1>This is the movie section</h1>
@@ -32,10 +23,13 @@ export default class Trend extends React.Component {
             )
         }
 
-        else if (this.props.category === "") {
+        else if (this.props.category === "Jokes") {
             return (
                 <div>
-                    <h1>Blank</h1>
+                    <div className="div-1">
+                        <h1>This is the trending section</h1>
+                        <h2>Find the latest movies, music and jokes!</h2>
+                    </div>
                 </div>
             )
         }
