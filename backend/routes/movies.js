@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const MovieDB = require('node-themoviedb');
-const mongoose = require('mongoose');
-const fetch = require('node-fetch');
 
 const mdb = new MovieDB(process.env.MOVIEDB_API_KEY)
 
@@ -34,8 +32,6 @@ router.get("/", async (req, res) => {
   catch (err) {
     res.status(400).send("error when finding movies: " + err);
   }
-  
-  // const jsonData = await fetchResponse;
 })
 
 module.exports = router;
