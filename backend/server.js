@@ -26,8 +26,6 @@ const jokeRouter = require('./routes/jokes');
 
 app.use('/tasks', taskRouter);
 app.use('/movies', movieRouter);
-
-const jokeRouter = require('./routes/jokes');
 app.use('/jokes', jokeRouter);
 
 /*
