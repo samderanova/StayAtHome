@@ -50,7 +50,11 @@ export default class App extends React.Component {
         <Router>
           <AppBar style={{position: 'relative'}}>
             <Toolbar>
+<<<<<<< HEAD
               <NewLink location='/' text="Stay-At-Home" variant="h4"/>
+=======
+              <NewLink location='/' text="Stay-At-Home Hub" variant="h4"/>
+>>>>>>> 993d3d54a9fe0133fb925c02a582fc0924769867
               <NewLink location='/taskgen' text="Task Generator" variant="h6" />
               <NewLink location='/feed' text="Feed" variant="h6" />
               <NewLink location='/relaxation' text="Relaxation" variant="h6" />

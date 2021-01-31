@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import {url} from '../../index'
+=======
+import React from 'react';
+import axios from 'axios';
+>>>>>>> 993d3d54a9fe0133fb925c02a582fc0924769867
 import './Trend.css'
 
 
@@ -13,6 +18,10 @@ export default class Trend extends React.Component {
         }
     }
     componentDidMount() {
+<<<<<<< HEAD
+=======
+        // Make calls to Movie API
+>>>>>>> 993d3d54a9fe0133fb925c02a582fc0924769867
     }
     render() {
         if (this.props.category === "Trending") {
@@ -27,6 +36,7 @@ export default class Trend extends React.Component {
         else if (this.props.category === "Movies") {
             return (
                 <div className="Trend">
+<<<<<<< HEAD
                     <table>
                         <thead>
                             <tr>
@@ -39,6 +49,10 @@ export default class Trend extends React.Component {
                             {this.props.movies}
                         </tbody>
                     </table>
+=======
+                    <h1>This is the movie section</h1>
+                    <iframe src="" title="Trending Movies" width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+>>>>>>> 993d3d54a9fe0133fb925c02a582fc0924769867
                 </div>
             )
         }
