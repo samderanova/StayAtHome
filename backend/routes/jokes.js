@@ -8,11 +8,7 @@ router.route('/').get((req, res) => {
         .then((joke) => {
             var random_jokes = [];
             var random_num;
-<<<<<<< HEAD
-            while (random_jokes.length < 10) {
-=======
             while (random_jokes.length != joke.length) {
->>>>>>> 993d3d54a9fe0133fb925c02a582fc0924769867
                 random_num = Math.floor(Math.random() * joke.length);
                 if (!random_jokes.includes(joke[random_num])) {
                     random_jokes.push(joke[random_num]);

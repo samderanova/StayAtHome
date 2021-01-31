@@ -14,10 +14,6 @@ export default class Relaxation extends React.Component {
     render() {
         return (
             <div className="Relaxation">
-                <h1>Check out some great movies</h1>
-                <div>
-                    {/* Movie component here*/}
-                </div>
                 <h1>How about some music?</h1>
                 <div className="playlists">
                     <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdxcBWuJkbcy" title="Motivation"width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>

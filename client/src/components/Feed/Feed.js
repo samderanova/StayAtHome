@@ -12,13 +12,16 @@ export default class Feed extends React.Component {
         super()
         this.state = {
             feed: "Movies",
-            movies: []
+            movies: [],
+            jokes: [],
+            rotated: false
         }
         this.toggleMovies = this.toggleMovies.bind(this)
         this.toggleJokes = this.toggleJokes.bind(this)
         this.switchColors = this.switchColors.bind(this)
         this.renderMovies = this.renderMovies.bind(this)
         this.shuffle = this.shuffle.bind(this)
+        this.rotateJoke = this.rotateJoke.bind(this)
     }
     componentDidMount() {
         this.renderMovies()
@@ -39,11 +42,11 @@ export default class Feed extends React.Component {
         return arr
     }
     renderMovies() {
+        document.getElementById("movies").style.color = sidebarColor
         axios.get(`${url}/movies`)
             .then(res => {
                 var movieRows = []
                 var movieList = this.shuffle(res.data)
-                console.log(movieList)
                 for (var i=0; i<movieList.length; i++) {
                     var movie = movieList[i]
                     movieRows.push(
@@ -58,6 +61,26 @@ export default class Feed extends React.Component {
             })
             .catch(err => console.log(err))
     }
+    rotateJoke(e) {
+        e.target.style.transform = 'rotate(0deg)'
+    }
+    renderJokes() {
+        axios.get(`${url}/jokes`)
+            .then(res => {
+                var jokeRows = []
+                for (var i=0; i<res.data.length; i++) {
+                    var joke = res.data[i]
+                    jokeRows.push(
+                        <div style={{padding: 30}} key={i}>
+                            <h2>{joke.jokeQuestion}</h2>
+                            <p id={`joke${i}`} style={{fontSize: 13, transform: 'rotate(180deg)'}} onClick={(e) => this.rotateJoke(e)}>{joke.jokeAnswer}</p>
+                        </div>
+                    )
+                }
+                this.setState({feed: "Jokes", jokes: jokeRows})
+            })
+            .catch(err => console.log(err))
+    }
     toggleMovies() {
         this.switchColors()
         document.getElementById("movies").style.color = sidebarColor 
@@ -66,7 +89,7 @@ export default class Feed extends React.Component {
     toggleJokes() {
         this.switchColors()
         document.getElementById("jokes").style.color = sidebarColor
-        this.setState({feed: "Jokes"})
+        this.renderJokes()
     }
     render() {
         return (
@@ -87,7 +110,7 @@ export default class Feed extends React.Component {
                     </h2>
                 </div>
                 <div className="right">
-                    <Trend category={this.state.feed} movies={this.state.movies}/>
+                    <Trend category={this.state.feed} movies={this.state.movies} jokes={this.state.jokes}/>
                 </div>
             </div>
         )

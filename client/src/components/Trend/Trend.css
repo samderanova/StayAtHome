@@ -6,14 +6,28 @@
     color: white; 
     align-items: center;
     justify-content: center;
-  }
+}
+
 .div-2 {
     font-size: 10px;
     color: blue;
 }
 
-
 tr > td:nth-child(2) {
   text-align: center;
-  width: 50%;
+  width: 30%;
+}
+
+tr > td:nth-child(3) {
+  padding: 30px;
+}
+
+table, th, td {
+  font-size: 20px;
+  border-collapse: collapse;
+  border: 3px solid #ddd; 
+}
+
+#title {
+  text-align: center;
 }
