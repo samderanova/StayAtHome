@@ -21,7 +21,10 @@ connection.once('open', () => {
 })
 
 const taskRouter = require('./routes/tasks');
+const movieRouter = require('./routes/movies');
+
 app.use('/tasks', taskRouter);
+app.use('/movies', movieRouter);
 /*
 const exercisesRouter= require('./routes/exercises');
 const usersRouter = require('./routes/users');
